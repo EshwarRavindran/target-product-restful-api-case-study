@@ -15,7 +15,7 @@ import java.util.Optional;
  * Service class to implement all Cassandra transactions
  */
 @Service
-public class CassandraServiceImpl {
+public class CassandraServiceImpl implements DatabaseService {
 
     private static final Logger Log = LoggerFactory.getLogger(CassandraServiceImpl.class);
 
@@ -36,6 +36,7 @@ public class CassandraServiceImpl {
      * @return {@link Price} Model for holding product price information
      * @throws ResourceNotFoundException
      */
+    @Override
     public Price getPriceDetailsFromDataBase(int productId) throws ResourceNotFoundException {
 
             Optional<ProductDetailsData> productDetailsData = null;
@@ -75,6 +76,7 @@ public class CassandraServiceImpl {
      * @return {@link ProductResponse} Model for creating the API response
      * @throws ResourceNotFoundException
      */
+    @Override
     public ProductResponse updateProductPriceInDatabase(ProductRequest productRequest) throws ResourceNotFoundException {
         ProductDetailsData productDetailsData = new ProductDetailsData();
         //ProductDetailsData updatedData = new ProductDetailsData();
