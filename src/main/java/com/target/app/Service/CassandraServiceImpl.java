@@ -54,7 +54,7 @@ public class CassandraServiceImpl implements DatabaseService {
                 }
                 else
                 {
-                    Log.info("Product with id " + productId + " is not found in the DB");
+                    Log.error("Product with id " + productId + " is not found in the DB");
                     throw new ResourceNotFoundException("Product with id "
                             + productId + " is not found in the DB");
                 }
@@ -99,7 +99,7 @@ public class CassandraServiceImpl implements DatabaseService {
             }
             else
             {
-                Log.info("Resource cannot be updated. Product with id "
+                Log.error("Resource cannot be updated. Product with id "
                         + productRequest.getProductId() + " is not found in the DB");
                 throw new ResourceNotFoundException("Resource cannot be updated. Product with id "
                         + productRequest.getProductId() + " is not found in the DB");
@@ -107,7 +107,7 @@ public class CassandraServiceImpl implements DatabaseService {
 
         }catch (CassandraConnectionFailureException exception)
         {
-            Log.info(exception.getMessage());
+            Log.error(exception.getMessage());
             throw exception;
         }
 

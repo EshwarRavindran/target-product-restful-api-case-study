@@ -53,12 +53,11 @@ public class RedskyService implements ExternalAPIService {
         {
             if(httpClientErrorException.getStatusCode().equals(HttpStatus.NOT_FOUND))
             {
-                Log.info("Product Id " + productId + "is not found in Redsky");
-                throw new ResourceNotFoundException("Product Id " + productId + " is not found in Redsky");
+                Log.error("Product Id " + productId + "is not found in Redsky");
             }
             else
             {
-                Log.info("Redsky API call failed");
+                Log.error("Redsky API call failed");
                 throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Redsky API call failed");
             }
         }

@@ -1,5 +1,6 @@
 package com.target.app.Service;
 
+import com.target.app.Exception.ResourceNotFoundException;
 import com.target.app.Model.Price;
 import com.target.app.Model.Product;
 import com.target.app.Model.ProductResponse;
@@ -23,18 +24,27 @@ public class ProductResponseBuildService {
      * @return {@link ProductResponse} Model for creating the API response
      *
      */
-    public ProductResponse buildProductResponseBody(Price price, Product product, int productId)
-    {
+    public ProductResponse buildProductResponseBody(Price price, Product product, int productId) throws ResourceNotFoundException {
         ProductResponse productResponse = new ProductResponse();
 
-        if(product != null && price != null)
+        if(product != null)
         {
-            productResponse.setPrice(price);
-            productResponse.setProductId(productId);
-            productResponse.setProductName(product
-                                           .getProductItem().getProductDescription().getProductTitle());
+            if(product.getProductItem() != null && product.getProductItem().getProductDescription() != null &&
+                    product.getProductItem().getProductDescription().getProductTitle() != null && price != null)
+            {
+                productResponse.setPrice(price);
+                productResponse.setProductId(productId);
+                productResponse.setProductName(product
+                        .getProductItem().getProductDescription().getProductTitle());
+            }
+            Log.info("Built product response " + productResponse.toString());
         }
-        Log.info("Built product response " + productResponse.toString());
+        else
+        {
+            Log.error("Product Id " + productId + " is not found in Redsky");
+            throw new ResourceNotFoundException("Product Id " + productId + " is not found in Redsky");
+        }
+
 
         return productResponse;
     }

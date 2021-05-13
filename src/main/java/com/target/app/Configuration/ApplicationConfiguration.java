@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,6 +15,7 @@ import java.util.concurrent.Executor;
  * Application configuration class
  */
 @Configuration
+@EnableAsync
 public class ApplicationConfiguration {
 
     @Value("${restTemplate.connection.timeout}")

@@ -1,5 +1,6 @@
 package com.target.app.Service;
 
+import com.target.app.Exception.ResourceNotFoundException;
 import com.target.app.Model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -36,7 +37,7 @@ class ProductResponseBuildServiceTest {
 
     @Test
     @DisplayName("Product Response should be not null when Price and Product are valid")
-    void buildProductResponseBodyWhenInputIsValid() {
+    void buildProductResponseBodyWhenInputIsValid() throws ResourceNotFoundException {
 
 
         ProductResponse response = productResponseBuildService.buildProductResponseBody(price, product, 1);
@@ -47,7 +48,7 @@ class ProductResponseBuildServiceTest {
 
     @Test
     @DisplayName("Product Response should be null when Price is null")
-    void buildProductResponseBdy() {
+    void buildProductResponseBdy() throws ResourceNotFoundException {
 
         price = null;
         ProductResponse response = productResponseBuildService.buildProductResponseBody(price, product, 1);

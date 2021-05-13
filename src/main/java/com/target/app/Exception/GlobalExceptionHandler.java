@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(CassandraConnectionFailureException.class)
-    public ResponseEntity<ExceptionResponseMessage> CassandraConnectionFailureException(CassandraConnectionFailureException e, WebRequest request)
+    public ResponseEntity<ExceptionResponseMessage> cassandraConnectionFailureException(CassandraConnectionFailureException e, WebRequest request)
     {
         ExceptionResponseMessage exceptionResponseMessage = new ExceptionResponseMessage("Database is not available",
                 LocalDateTime.now(), request.getDescription(false));

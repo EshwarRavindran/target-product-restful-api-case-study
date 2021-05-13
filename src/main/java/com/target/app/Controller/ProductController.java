@@ -7,11 +7,9 @@ import com.target.app.Model.ProductResponse;
 import com.target.app.Service.ProductPriceServiceImpl;
 import com.target.app.Utilities.RestInputValidator;
 import com.target.app.Service.CassandraServiceImpl;
-import com.target.app.Service.ExternalAPIService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,7 +52,6 @@ public class ProductController {
             productResponse = productPriceService.getProductResponse(productId);
 
 
-
         return ResponseEntity.ok(productResponse);
     }
 
@@ -74,7 +71,9 @@ public class ProductController {
 
         ProductResponse productResponse = new ProductResponse();
 
-        if(restInputValidator.isUpdateRequestValid(productRequest, productId))
+        boolean isRequestValid = restInputValidator.isUpdateRequestValid(productRequest, productId);
+
+        if(isRequestValid == Boolean.TRUE)
         {
             //Calling the DB service to update the product info
             productResponse = cassandraService.updateProductPriceInDatabase(productRequest);
